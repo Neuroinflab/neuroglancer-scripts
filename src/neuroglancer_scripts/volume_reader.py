@@ -330,6 +330,8 @@ def nibabel_image_to_precomputed(img,
         )
     if load_full_volume:
         logger.info("Loading full volume to memory... ")
+        # the structured rgb format handling is explained in this stackoverflow question
+        # https://stackoverflow.com/questions/40534333/how-to-write-a-color-3d-nifti-with-nibabel
         if structured_rgb:
             volume = np.asanyarray(img.dataobj)
             volume = volume.copy().view(dtype=np.uint8).reshape(volume.shape[0:4] + (3,))
